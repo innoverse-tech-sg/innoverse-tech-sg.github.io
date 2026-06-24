@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Innoverse – Linux IT Automation</title>
+  <meta name="description" content="Innoverse automates your Linux infrastructure — from bare metal to cloud — so your team ships faster and sleeps soundly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0A0F1E;
+      --slate:     #111827;
+      --slate2:    #1A2340;
+      --border:    #1E2D50;
+      --cyan:      #00D4FF;
+      --cyan-dim:  #00A8CC;
+      --green:     #39FF14;
+      --smoke:     #E8EDF5;
+      --muted:     #6B7FA3;
+      --white:     #FFFFFF;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--smoke);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ──────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 32px; height: 32px;
+      background: var(--cyan);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo-text span { color: var(--cyan); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--cyan);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+
+    .nav-cta:hover {
+      background: #33DDFF !important;
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--smoke);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cyan);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 2px;
+      background: rgba(0, 212, 255, 0.05);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--cyan);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--cyan);
+      color: var(--navy);
+      padding: 0.75rem 1.8rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-family: var(--font-display);
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: #33DDFF;
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--smoke);
+      padding: 0.75rem 1.8rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* ── TERMINAL ─────────────────────────────────── */
+    .terminal {
+      background: #070B14;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,212,255,0.08),
+        0 24px 64px rgba(0,0,0,0.6);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #0D1322;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red   { background: #FF5F57; }
+    .terminal-dot.amber { background: #FEBC2E; }
+    .terminal-dot.green { background: #28C840; }
+
+    .terminal-title {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .terminal-body {
+      padding: 20px 22px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.9;
+      min-height: 320px;
+    }
+
+    .t-line { display: flex; gap: 8px; }
+
+    .t-prompt { color: var(--cyan); flex-shrink: 0; }
+    .t-cmd    { color: #C8D3F5; }
+    .t-comment { color: #3A4A6A; }
+    .t-out    { color: #8BA1C5; padding-left: 0; }
+    .t-ok     { color: var(--green); }
+    .t-warn   { color: #FEBC2E; }
+    .t-cursor {
+      display: inline-block;
+      width: 8px; height: 1em;
+      background: var(--cyan);
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+    }
+
+    /* ── SECTION SHARED ───────────────────────────── */
+    section { padding: 96px 5%; }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── STATS STRIP ──────────────────────────────── */
+    .stats-strip {
+      padding: 32px 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--slate);
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      text-align: center;
+    }
+
+    .stat-item { padding: 16px; }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SERVICES ─────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card--featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .service-card--featured .service-icon { margin-bottom: 0; }
+    .service-card--featured .service-name { margin-bottom: 0.2rem; }
+    .service-card--featured .service-tag  { margin-top: 0; white-space: nowrap; }
+
+    .service-card {
+      background: var(--slate);
+      padding: 2.2rem;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: background 0.25s;
+      cursor: default;
+    }
+
+    .service-card:hover { background: var(--slate2); }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.3rem;
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .service-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────── */
+    .how-section { background: var(--slate); }
+
+    .process-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process-list::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
+    }
+
+    .process-step { padding: 0 1.5rem 0 0; }
+
+    .step-num {
+      width: 56px; height: 56px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--cyan);
+      margin-bottom: 1.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      font-size: 0.855rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── TECH STACK ───────────────────────────────── */
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+
+    .tech-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--smoke);
+      background: var(--slate2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tech-pill:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .tech-pill-dot {
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── WHY INNOVERSE ────────────────────────────── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .why-list { list-style: none; }
+
+    .why-item {
+      display: flex;
+      gap: 16px;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-item:first-child { border-top: 1px solid var(--border); }
+
+    .why-check {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border: 1px solid var(--cyan);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      font-size: 0.7rem;
+      color: var(--cyan);
+    }
+
+    .why-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .why-desc {
+      font-size: 0.855rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── METRICS PANEL ────────────────────────────── */
+    .metrics-panel {
+      background: var(--slate2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+
+    .metrics-header {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metrics-header::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .metric-row:last-child { border-bottom: none; }
+
+    .metric-name { color: var(--muted); font-family: var(--font-mono); }
+
+    .metric-bar-wrap {
+      flex: 1;
+      margin: 0 1rem;
+      background: var(--navy);
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .metric-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--green));
+      border-radius: 2px;
+      transform-origin: left;
+      animation: growBar 1.5s ease-out forwards;
+    }
+
+    @keyframes growBar {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .metric-val { color: var(--cyan); font-family: var(--font-mono); font-size: 0.8rem; }
+
+
+
+    /* ── CTA BAND ─────────────────────────────────── */
+    .cta-band {
+      background: linear-gradient(135deg, #0D1628, #091520);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 96px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-band::after {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-band h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 640px;
+      margin: 0 auto 1rem;
+      line-height: 1.15;
+    }
+
+    .cta-band p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 2.4rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      background: #060A13;
+      border-top: 1px solid var(--border);
+      padding: 56px 5% 32px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 0.8rem;
+      max-width: 280px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links { list-style: none; }
+
+    .footer-links li + li { margin-top: 0.5rem; }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cyan); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 24px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-domain {
+      font-family: var(--font-mono);
+      color: var(--cyan);
+    }
+
+    /* ── MOBILE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-list {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-list::before { display: none; }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card--featured {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card--featured .service-tag { white-space: normal; }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .process-list { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-mark"></div>
+      <span class="nav-logo-text">Inno<span>verse</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#why">Why us</a></li>
+      <li><a href="#contact" class="nav-cta">Get started</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Open menu" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">Linux IT Automation</div>
+        <h1>Your Linux infrastructure,<br/><em>fully automated.</em></h1>
+        <p class="hero-sub">Innoverse builds intelligent automation pipelines that provision, configure, and self-heal your Linux environments — from a single server to thousands of nodes.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Start a project</a>
+          <a href="#services" class="btn-ghost">Explore services</a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot amber"></div>
+            <div class="terminal-dot green"></div>
+            <div class="terminal-title">innoverse@prod-cluster ~ bash</div>
+          </div>
+          <div class="terminal-body" id="terminal-output">
+            <!-- filled by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-value">99.97%</div>
+        <div class="stat-label">Uptime across managed fleets</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">10×</div>
+        <div class="stat-label">Faster deployment cycles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">2 min</div>
+        <div class="stat-label">Mean time to auto-remediate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">Zero</div>
+        <div class="stat-label">Manual runbooks required</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-label">// What we build</div>
+      <h2 class="section-title">End-to-end Linux<br/>automation services</h2>
+      <p class="section-sub">We design, build, and operate automation solutions that eliminate toil and let your engineers focus on what actually matters.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <div class="service-name">Infrastructure as Code</div>
+          <p class="service-desc">Declarative Linux provisioning with Ansible, Terraform, and Pulumi. Version-controlled, peer-reviewed, reproducible — every time.</p>
+          <span class="service-tag">→ ANSIBLE · TERRAFORM</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔁</div>
+          <div class="service-name">CI/CD Pipeline Engineering</div>
+          <p class="service-desc">End-to-end pipelines that build, test, and deploy on Linux with zero-downtime strategies: blue-green, canary, rolling.</p>
+          <span class="service-tag">→ JENKINS · GITLAB CI · AWX</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📦</div>
+          <div class="service-name">Container & Orchestration</div>
+          <p class="service-desc">Kubernetes and Podman on Linux — cluster architecture, security hardening, and automated scaling tuned to your workloads.</p>
+          <span class="service-tag">→ K8S · PODMAN · CONTAINERD</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <div class="service-name">Security & Compliance Automation</div>
+          <p class="service-desc">CIS benchmark enforcement, automated CVE patching, SELinux policy management, and audit trails that satisfy SOC 2 and ISO 27001.</p>
+          <span class="service-tag">→ LYNIS · CIS BENCHMARKS · AUDITD</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <div class="service-name">Observability & Alerting</div>
+          <p class="service-desc">Full-stack observability with Prometheus, Grafana, and Loki. SLO-driven alerting with smart runbook automation built in.</p>
+          <span class="service-tag">→ PROMETHEUS · GRAFANA · LOKI</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <div class="service-name">Self-Healing Systems</div>
+          <p class="service-desc">Event-driven automation that detects failures, executes remediation playbooks, and pages humans only when machines truly can't fix it.</p>
+          <span class="service-tag">→ SYSTEMD · AWX · EVENT-DRIVEN ANSIBLE</span>
+        </div>
+        <div class="service-card service-card--featured">
+          <div class="service-icon">🔒</div>
+          <div class="service-name">Air-Gapped Environment Automation</div>
+          <p class="service-desc">Full automation for networks with zero internet access — offline package mirrors, disconnected Kubernetes clusters, local container registries, and secure patch pipelines that never touch the public internet.</p>
+          <span class="service-tag">→ DISCONNECTED K8S · LOCAL MIRRORS · OFFLINE AWX</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="section-inner">
+      <div class="section-label">// Our process</div>
+      <h2 class="section-title">From assessment<br/>to autonomous ops</h2>
+      <p class="section-sub">A structured engagement model that moves fast without cutting corners.</p>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Discovery audit</div>
+          <p class="step-desc">We map your current Linux estate — packages, services, dependencies, security posture — in 48 hours using non-invasive tooling.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Automation blueprint</div>
+          <p class="step-desc">A prioritised roadmap of automation wins: quick savings first, strategic architecture second. No vendor lock-in.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Build & integrate</div>
+          <p class="step-desc">We write production-grade playbooks, pipelines, and policies — code-reviewed, tested on staging, rolled out with zero disruption.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Handover & operate</div>
+          <p class="step-desc">Full documentation, team training, and optional managed operations so your team owns the system confidently from day one.</p>
+        </div>
+      </div>
+
+      <!-- Tech stack pills -->
+      <div style="margin-top: 4rem;">
+        <div class="section-label">// Technologies we specialise in</div>
+        <div class="tech-pills">
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Red Hat / RHEL</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Ubuntu Server</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Debian</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>AlmaLinux</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Ansible</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Terraform</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Kubernetes</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Podman</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Prometheus</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Grafana</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>AWX</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>GitLab CI</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Loki</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Systemd</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Air-Gapped Deployments</span>
+          <span class="tech-pill"><span class="tech-pill-dot"></span>Bash / Python</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY INNOVERSE -->
+  <section id="why">
+    <div class="section-inner">
+      <div class="why-grid">
+        <div class="why-copy">
+          <div class="section-label">// Why Innoverse</div>
+          <h2 class="section-title">Built by engineers<br/>who've run Linux at scale</h2>
+          <p class="section-sub">We don't sell licences. We build automation that belongs to you — readable, documented, and team-ready.</p>
+          <ul class="why-list">
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <div class="why-title">Linux-native, not cloud-vendor wrapped</div>
+                <p class="why-desc">Every solution is built on open standards. You're never locked into our tools or our billing.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <div class="why-title">Code you can read and modify</div>
+                <p class="why-desc">All playbooks and pipelines are peer-reviewed, fully commented, and handed over with complete documentation.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <div class="why-title">Security is not an afterthought</div>
+                <p class="why-desc">Hardening, least-privilege, and audit logging are baked into every deliverable — not retrofitted later.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <div class="why-title">Transparent, flat-fee engagements</div>
+                <p class="why-desc">Fixed scopes with clear milestones. No surprise invoices, no hourly anxiety.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <div class="why-title">Air-gapped & classified environments</div>
+                <p class="why-desc">We design and deliver automation for fully disconnected networks — no internet dependency, no compromise on capability.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="metrics-panel">
+          <div class="metrics-header">LIVE AUTOMATION METRICS — prod-cluster-sg-01</div>
+          <div class="metric-row">
+            <span class="metric-name">patch_compliance</span>
+            <div class="metric-bar-wrap"><div class="metric-bar" style="width:98%"></div></div>
+            <span class="metric-val">98%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-name">deploy_success_rate</span>
+            <div class="metric-bar-wrap"><div class="metric-bar" style="width:100%"></div></div>
+            <span class="metric-val">100%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-name">auto_remediation</span>
+            <div class="metric-bar-wrap"><div class="metric-bar" style="width:94%"></div></div>
+            <span class="metric-val">94%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-name">drift_detected</span>
+            <div class="metric-bar-wrap"><div class="metric-bar" style="width:3%; background: linear-gradient(90deg, #FF5F57, #FF8C57)"></div></div>
+            <span class="metric-val" style="color:#FF7A57">3%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-name">mttr_minutes</span>
+            <div class="metric-bar-wrap"><div class="metric-bar" style="width:15%; background: linear-gradient(90deg, var(--green), var(--cyan))"></div></div>
+            <span class="metric-val">1.8m</span>
+          </div>
+          <div style="margin-top:1.4rem; padding-top:1rem; border-top:1px solid var(--border);">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted);">
+              <span style="color:var(--green);">●</span> All systems nominal &nbsp;·&nbsp; Last run: 47s ago
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- CTA BAND -->
+  <section class="cta-band" id="contact">
+    <h2>Ready to automate your<br/>Linux infrastructure?</h2>
+    <p>Tell us about your environment. We'll respond within one business day with a concrete first step.</p>
+    <div class="cta-actions">
+      <a href="mailto:hello@innoverse-tech.org" class="btn-primary">hello@innoverse-tech.org</a>
+      <a href="#services" class="btn-ghost">Browse services</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#" style="display:inline-flex; margin-bottom:0.6rem;">
+          <div class="nav-logo-mark"></div>
+          <span class="nav-logo-text" style="margin-left:10px;">Inno<span>verse</span></span>
+        </a>
+        <p>Linux IT automation specialists. We build infrastructure that provisions itself, heals itself, and stays compliant — so your engineers can build what matters.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Infrastructure as Code</a></li>
+          <li><a href="#services">CI/CD Engineering</a></li>
+          <li><a href="#services">Container Orchestration</a></li>
+          <li><a href="#services">Security Automation</a></li>
+          <li><a href="#services">Observability</a></li>
+          <li><a href="#services">Self-Healing Systems</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Innoverse</a></li>
+          <li><a href="#">Our process</a></li>
+          <li><a href="#">Case studies</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Connect</div>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@innoverse-tech.org">hello@innoverse-tech.org</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Terms of service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Innoverse Pte Ltd. All rights reserved.</span>
+      <span class="footer-domain">innoverse-tech.org</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ── TERMINAL TYPEWRITER ──────────────────────── */
+    const lines = [
+      { type: 'cmd',  prompt: 'root@prod-01:~#', text: 'ansible-playbook site.yml --check' },
+      { type: 'out',  text: '' },
+      { type: 'out',  text: 'PLAY [Provision web cluster] ********************' },
+      { type: 'ok',   text: 'ok: [node-01] => gather_facts' },
+      { type: 'ok',   text: 'ok: [node-02] => gather_facts' },
+      { type: 'ok',   text: 'changed: [node-01] => install nginx 1.26.1' },
+      { type: 'ok',   text: 'changed: [node-02] => install nginx 1.26.1' },
+      { type: 'ok',   text: 'changed: [node-01] => deploy TLS cert (Let\'s Encrypt)' },
+      { type: 'ok',   text: 'changed: [node-01] => apply CIS hardening role' },
+      { type: 'ok',   text: 'changed: [node-02] => apply CIS hardening role' },
+      { type: 'out',  text: '' },
+      { type: 'ok',   text: 'PLAY RECAP ──────────────────────────────────────' },
+      { type: 'stat', text: 'node-01   : ok=12  changed=5  failed=0  skipped=1' },
+      { type: 'stat', text: 'node-02   : ok=12  changed=5  failed=0  skipped=1' },
+      { type: 'out',  text: '' },
+      { type: 'cmd',  prompt: 'root@prod-01:~#', text: '' },
+    ];
+
+    const container = document.getElementById('terminal-output');
+    let li = 0;
+    let ci = 0;
+    let rendered = [];
+
+    function render() {
+      container.innerHTML = rendered.map(renderLine).join('') + renderCurrent();
+    }
+
+    function renderLine(l) {
+      if (l.type === 'cmd') {
+        return `<div class="t-line"><span class="t-prompt">${l.prompt}</span><span class="t-cmd"> ${l.text}</span></div>`;
+      }
+      if (l.type === 'ok') {
+        return `<div class="t-line"><span class="t-ok">${l.text}</span></div>`;
+      }
+      if (l.type === 'stat') {
+        return `<div class="t-line"><span class="t-warn">${l.text}</span></div>`;
+      }
+      return `<div class="t-line"><span class="t-out">${l.text || '&nbsp;'}</span></div>`;
+    }
+
+    function renderCurrent() {
+      if (li >= lines.length) return `<div class="t-line"><span class="t-prompt">root@prod-01:~#</span><span class="t-cursor"></span></div>`;
+      const l = lines[li];
+      if (l.type === 'cmd') {
+        const partial = l.text.slice(0, ci);
+        return `<div class="t-line"><span class="t-prompt">${l.prompt}</span><span class="t-cmd"> ${partial}</span><span class="t-cursor"></span></div>`;
+      }
+      return '';
+    }
+
+    function tick() {
+      if (li >= lines.length) { render(); return; }
+      const l = lines[li];
+      if (l.type === 'cmd') {
+        if (ci < l.text.length) { ci++; render(); setTimeout(tick, 38 + Math.random() * 30); }
+        else { rendered.push(l); li++; ci = 0; render(); setTimeout(tick, 420); }
+      } else {
+        rendered.push(l); li++; ci = 0; render();
+        setTimeout(tick, l.type === 'out' && !l.text ? 80 : 160);
+      }
+    }
+
+    setTimeout(tick, 900);
+
+    /* ── HAMBURGER ────────────────────────────────── */
+    function toggleMenu(btn) {
+      const links = document.querySelector('.nav-links');
+      const open = links.style.display === 'flex';
+      links.style.display = open ? '' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '68px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = '#0A0F1E';
+      links.style.borderBottom = '1px solid #1E2D50';
+      links.style.padding = '1rem 5%';
+      links.style.gap = '1rem';
+      if (open) links.style.display = 'none';
+    }
+
+    /* ── SCROLL FADE IN ───────────────────────────── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .process-step, .why-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
